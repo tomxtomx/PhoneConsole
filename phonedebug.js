@@ -32,6 +32,8 @@ window.onload = function(){
 			var btn = document.createElement('A');
 			var panelshowed = false;
 			//
+			panel.style.margin = '0';
+			panel.style.border = '0';
 			panel.style['font-size'] = '14px';
 			panel.style.position = 'fixed';
 			panel.style.padding = '10px';
@@ -41,10 +43,9 @@ window.onload = function(){
 		    panel.style.bottom = '0';
 		    panel.style.width = '100%';
 		    panel.style.background = 'rgba(0,0,0,0.8)';
-		    panel.style.overflow = 'scroll';
 		    panel.style.color = '#ccc';
 		    panel.style.display = 'none';
-		    panel.style.zoom = Number.MAX_VALUE-1;
+		    panel.style.zoom = (Number.MAX_VALUE-1).toString();
 		    panel.setAttribute('readOnly', 'readOnly');
 			// 
 			btn.style['font-size'] = '14px';
@@ -56,7 +57,7 @@ window.onload = function(){
 		    btn.style.bottom = '10px';
 		    btn.style.right = '10px';
 			btn.textContent = 'debug';
-			panel.style.zoom = Number.MAX_VALUE;
+			panel.style.zoom = (Number.MAX_VALUE).toString();
 			// 
 			this.init = init;
 			this.add = add;
@@ -71,5 +72,5 @@ window.onload = function(){
 	PHONEDEBUG.init();
 	PHONEDEBUG.add('asdasd');
 	PHONEDEBUG.add({aa:'adsasdasd'});
-	PHONEDEBUG.add([{aa:'adsasdasd'}, {bb:'bbbbb'}]);
+	PHONEDEBUG.add([{aa:'adsasdasd'}, {bb:'bbbbb'}, {bb:'bbbbb'}, {bb:'bbbbb'}, {bb:'bbbbb'}, {bb:'bbbbb'}]);
 }
