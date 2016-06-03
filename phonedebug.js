@@ -1,7 +1,7 @@
 window.onload = function(){
 
 	(function(){
-
+ 
 		var phonedebug = function(){
 
 			function init(){
