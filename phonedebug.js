@@ -2,14 +2,14 @@ window.onload = function(){
  	// 
 	var phonedebug = function(){
 		// 元素外观修饰
-		function decorator(type, element){
+		function decorator(type, element, elementype){
 			switch(type){
 				case 'li':
 					element.style['word-break'] = 'break-all';
 					element.style['margin-bottom'] = '5px';
 					element.style['padding-bottom'] = '5px';
 					element.style['border-bottom'] = '1px solid darkslategrey';
-					element.style.color = checkres.color;
+					element.style.color = getcolor(elementype);
 				break;
 				case 'panel':
 					element.style.margin = '0';
@@ -52,51 +52,59 @@ window.onload = function(){
 			}
 		}
 		// 
-		function checktype(li, o){
-			var color = 'white';
-			var type = '';
-			// 判断是否数组
-			if(Object.prototype.toString.call(o) === "[object Array]"){
-					color = '#66CCFF';
-					type = 'array';
-				}else{
-					// 判断是否其他类型
-					type = (typeof o).toLowerCase();
-				switch(type){
-					case 'object':
-						color = '#FFCC00';
-					break;
-					case 'number':
-						color = '#FFFF99';
-					break;
-					case 'function':
-						color = '#00FFFF';
-					break;
-					case 'string':
-						color = '#ffffff';
-					break;
-					case 'date':
-						color = '#CC33CC';
-					break;
-					case 'undefined':
-						color = '#FF0000';
-					break;
-				}
+		function getcolor(type){
+			switch(type){
+				case 'object':
+					return '#FFCC00';
+				break;
+				case 'array':
+					return '#66CCFF';
+				break;
+				case 'number':
+					return '#FFFF99';
+				break;
+				case 'function':
+					return '#00FFFF';
+				break;
+				case 'string':
+					return '#ffffff';
+				break;
+				case 'date':
+					return '#CC33CC';
+				break;
+				case 'undefined':
+					return '#FF0000';
+				break;
+				default:
+					return '#ffffff';
+				break;
 			}
-			return {type: type, color: color};
+		}
+		// 
+		function checktype(o){
+			// 数组类型
+			if(Object.prototype.toString.call(o) === "[object Array]"){
+				return 'array';
+			}else{
+				// 其他类型
+				return (typeof o).toLowerCase();
+			}
 		}
 		// 
 		function add(o){
 			var li = document.createElement('LI');
-			var checkres = checktype(li, o);
+			var type = checktype(o);
 			// 
-			decorator('li', li);
+			decorator('li', li, type);
 			// 
-			if(checkres.type === 'string')
+			if(type === 'string')
 				li.textContent += o + '\n';
 			else
 				li.textContent += JSON.stringify(o) + '\n';
+			// 
 			panel.appendChild(li);
+			// 
+			console.log(o);
 		}
 		// 
 		var body = document.getElementsByTagName('body')[0];
@@ -115,5 +123,5 @@ window.onload = function(){
 		return add;
 	}
 	// 全局单例调用
-	console.log = new phonedebug();
+	console.phone = new phonedebug();
 }
