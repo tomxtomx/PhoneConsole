@@ -1,7 +1,47 @@
 window.onload = function(){
- 
+ 	// 
 	var phonedebug = function(){
-
+		// 元素外观修饰
+		function decorator(type, element){
+			switch(type){
+				case 'li':
+					element.style['word-break'] = 'break-all';
+					element.style['margin-bottom'] = '5px';
+					element.style['padding-bottom'] = '5px';
+					element.style['border-bottom'] = '1px solid darkslategrey';
+					element.style.color = checkres.color;
+				break;
+				case 'panel':
+					element.style.margin = '0';
+					element.style.border = '0';
+					element.style['overflow-y'] = 'scroll';
+					element.style['font-size'] = '14px';
+					element.style.position = 'fixed';
+					element.style.padding = '10px';
+				    element.style.top = '0';
+				    element.style.left = '0';
+				    element.style.right = '0';
+				    element.style.bottom = '0';
+				    element.style.background = 'rgba(0,0,0,0.8)';
+				    element.style.color = '#ccc';
+				    element.style.display = 'none';
+				    element.style.zoom = (Number.MAX_VALUE-1).toString();
+				break;
+				case 'btn':
+					element.style['font-size'] = '14px';
+					element.style.border = '1px solid #ccc';
+					element.style.background = 'white';
+					element.style.color = 'black';
+					element.style.padding = '5px';
+					element.style.position = 'fixed';
+				    element.style.bottom = '10px';
+				    element.style.right = '10px';
+					element.textContent = 'debug';
+					element.style.zoom = (Number.MAX_VALUE).toString();
+				break;
+			}
+		}
+		// 
 		function togglepanel(){
 			if(panelshowed){
 				panelshowed = false;
@@ -11,7 +51,7 @@ window.onload = function(){
 				panel.style.display = 'block';
 			}
 		}
-
+		// 
 		function checktype(li, o){
 			var color = 'white';
 			var type = '';
@@ -42,55 +82,30 @@ window.onload = function(){
 						color = '#FF0000';
 					break;
 				}
-				}
+			}
 			return {type: type, color: color};
 		}
-
+		// 
 		function add(o){
 			var li = document.createElement('LI');
 			var checkres = checktype(li, o);
-			li.style['word-break'] = 'break-all';
-			li.style['margin-bottom'] = '5px';
-			li.style['padding-bottom'] = '5px';
-			li.style['border-bottom'] = '1px solid darkslategrey';
-			li.style.color = checkres.color;
+			// 
+			decorator('li', li);
+			// 
 			if(checkres.type === 'string')
 				li.textContent += o + '\n';
 			else
 				li.textContent += JSON.stringify(o) + '\n';
 			panel.appendChild(li);
 		}
-
+		// 
 		var body = document.getElementsByTagName('body')[0];
 		var panel = document.createElement('UL');
 		var btn = document.createElement('A');
 		var panelshowed = false;
 		//
-		panel.style.margin = '0';
-		panel.style.border = '0';
-		panel.style['overflow-y'] = 'scroll';
-		panel.style['font-size'] = '14px';
-		panel.style.position = 'fixed';
-		panel.style.padding = '10px';
-	    panel.style.top = '0';
-	    panel.style.left = '0';
-	    panel.style.right = '0';
-	    panel.style.bottom = '0';
-	    panel.style.background = 'rgba(0,0,0,0.8)';
-	    panel.style.color = '#ccc';
-	    panel.style.display = 'none';
-	    panel.style.zoom = (Number.MAX_VALUE-1).toString();
-		// 
-		btn.style['font-size'] = '14px';
-		btn.style.border = '1px solid #ccc';
-		btn.style.background = 'white';
-		btn.style.color = 'black';
-		btn.style.padding = '5px';
-		btn.style.position = 'fixed';
-	    btn.style.bottom = '10px';
-	    btn.style.right = '10px';
-		btn.textContent = 'debug';
-		panel.style.zoom = (Number.MAX_VALUE).toString();
+		decorator('panel', panel);
+		decorator('btn', btn);
 		//
 		body.appendChild(btn);
 		body.appendChild(panel);
@@ -100,5 +115,5 @@ window.onload = function(){
 		return add;
 	}
 	// 全局单例调用
-	console.phone = new phonedebug();
+	console.log = new phonedebug();
 }
