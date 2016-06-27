@@ -27,8 +27,7 @@
 					    element.style.background = 'rgba(0,0,0,0.8)';
 					    element.style.color = '#ccc';
 					    element.style.display = 'none';
-					    element.style['z-index'] = Number.MAX_VALUE-1;
-					    element.style.zoom = (Number.MAX_VALUE-1).toString();
+					    element.style['z-index'] = '9999999999';
 					break;
 					case 'btn':
 						element.style['font-size'] = '14px';
@@ -39,9 +38,8 @@
 						element.style.position = 'fixed';
 					    element.style.bottom = '10px';
 					    element.style.right = '10px';
-					    element.style['z-index'] = Number.MAX_VALUE;
+					    element.style['z-index'] = '9999999999';
 						element.textContent = 'debug';
-						element.style.zoom = (Number.MAX_VALUE).toString();
 					break;
 				}
 			}
@@ -96,7 +94,7 @@
 			}
 			// 
 			function add(o){
-				var li = document.createElement('LI');
+				var li = document.createElement('DIV');
 				var type = checktype(o);
 				// 
 				decorator('li', li, type);
@@ -112,7 +110,7 @@
 			}
 			// 
 			var body = document.getElementsByTagName('body')[0];
-			var panel = document.createElement('UL');
+			var panel = document.createElement('DIV');
 			var btn = document.createElement('A');
 			var panelshowed = false;
 			//
