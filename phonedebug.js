@@ -27,6 +27,7 @@
 					    element.style.background = 'rgba(0,0,0,0.8)';
 					    element.style.color = '#ccc';
 					    element.style.display = 'none';
+					    element.style['z-index'] = Number.MAX_VALUE-1;
 					    element.style.zoom = (Number.MAX_VALUE-1).toString();
 					break;
 					case 'btn':
@@ -38,6 +39,7 @@
 						element.style.position = 'fixed';
 					    element.style.bottom = '10px';
 					    element.style.right = '10px';
+					    element.style['z-index'] = Number.MAX_VALUE;
 						element.textContent = 'debug';
 						element.style.zoom = (Number.MAX_VALUE).toString();
 					break;
